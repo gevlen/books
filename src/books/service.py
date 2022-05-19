@@ -15,11 +15,11 @@ class BookService:
         book = schema.load(data)
         db.session.add(book)
         db.session.commit()
-        return schema.dump(data)
+        return schema.dump(Book.query.filter_by(title=book.title).first()), 201
 
     def get_book_by_id(self, id):
         schema = BookSchema()
-        books = Book.query.get(id)
+        books = Book.query.get_or_404(id)
         return schema.dump(books)
 
     def update_book(self, id, book_data):

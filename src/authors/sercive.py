@@ -15,17 +15,17 @@ class AuthorService:
         author = schema.load(data)
         db.session.add(author)
         db.session.commit()
-        return schema.dump(data)
+        return schema.dump(Author.query.filter_by(name=author.name).first()), 201
 
     def get_author_by_id(self, id):
         schema = AuthorSchema()
-        author = Author.query.get(id)
+        author = Author.query.get_or_404(id)
         return schema.dump(author)
 
     def update_author(self, id, author_data):
         schema = AuthorSchema()
         data = author_data.get_json()
-        author = schema.load(data, instance=Author().query.get(id))
+        author = schema.load(data, instance=Author().query.get_or_404(id))
         db.session.commit()
         return schema.dump(author)
 
