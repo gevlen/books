@@ -2,7 +2,6 @@ from datetime import date
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
-
 db = SQLAlchemy()
 migrate = Migrate()
 
@@ -13,7 +12,6 @@ class Book(db.Model):
     created_at = db.Column(db.Date, default=date.today)
     updated_at = db.Column(db.Date, default=None, onupdate=date.today())
     author_id = db.Column(db.Integer, db.ForeignKey("author.id", ondelete='SET NULL'), nullable=True)
-
 
     def __repr__(self):
         return f'{self.title}'
@@ -26,5 +24,3 @@ class Author(db.Model):
 
     def __repr__(self):
         return f'{self.name}'
-
-

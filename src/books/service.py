@@ -35,6 +35,3 @@ class BookService:
         db.session.delete(book)
         db.session.commit()
         return schema.dump(book)
-
-
-

@@ -13,6 +13,7 @@ class BooksAPI(Resource):
         book_service = BookService()
         return book_service.add_new_book(request)
 
+
 class BookAPI(Resource):
     def get(self, id):
         book_service = BookService()
@@ -25,7 +26,6 @@ class BookAPI(Resource):
     def delete(self, id):
         book_service = BookService()
         return book_service.delete_book_by_id(id)
-
 
 
 def initialize_book_api(api):
