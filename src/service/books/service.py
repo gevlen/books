@@ -1,6 +1,6 @@
 from src.database.tables import Book, db
 
-from src.books.models import BookSchema
+from src.service.books.models import BookSchema
 
 
 class BookService:
@@ -15,7 +15,7 @@ class BookService:
         book = schema.load(data)
         db.session.add(book)
         db.session.commit()
-        return schema.dump(Book.query.filter_by(title=book.title).first()), 201
+        return schema.dump(Book.query.filter_by(title=book.title).first())
 
     def get_book_by_id(self, id):
         schema = BookSchema()

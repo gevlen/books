@@ -5,7 +5,7 @@ from flask_restful import Api
 
 from src.database import initialize_db, initialize_migrations
 from src.api.books import initialize_book_api
-from src.books.models import ma
+from src.service.books.models import ma
 from src.api.authors import initialize_author_api
 
 

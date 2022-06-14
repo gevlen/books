@@ -1,6 +1,6 @@
 from src.database.tables import Author, db
 
-from src.authors.models import AuthorSchema
+from src.service.authors.models import AuthorSchema
 
 
 class AuthorService:
@@ -15,7 +15,7 @@ class AuthorService:
         author = schema.load(data)
         db.session.add(author)
         db.session.commit()
-        return schema.dump(Author.query.filter_by(name=author.name).first()), 201
+        return schema.dump(Author.query.filter_by(name=author.name).first())
 
     def get_author_by_id(self, id):
         schema = AuthorSchema()

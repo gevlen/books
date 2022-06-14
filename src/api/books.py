@@ -1,31 +1,29 @@
 from flask_restful import Resource, request
 
-from src.books.service import BookService
+from src.service.books.service import BookService
 
 
 class BooksAPI(Resource):
+    book_service = BookService()
 
     def get(self):
-        book_service = BookService()
-        return book_service.get_all_books()
+        return self.book_service.get_all_books()
 
     def post(self):
-        book_service = BookService()
-        return book_service.add_new_book(request)
+        return self.book_service.add_new_book(request), 201
 
 
 class BookAPI(Resource):
+    book_service = BookService()
+
     def get(self, id):
-        book_service = BookService()
-        return book_service.get_book_by_id(id)
+        return self.book_service.get_book_by_id(id)
 
     def put(self, id):
-        book_service = BookService()
-        return book_service.update_book(id, request)
+        return self.book_service.update_book(id, request)
 
     def delete(self, id):
-        book_service = BookService()
-        return book_service.delete_book_by_id(id)
+        return self.book_service.delete_book_by_id(id)
 
 
 def initialize_book_api(api):
