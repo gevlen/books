@@ -4,6 +4,11 @@ from src.service.books.models import BookSchema
 
 
 class BookService:
+    def __new__(cls):
+        if not hasattr(cls, 'instance'):
+            cls.instance = super(BookService, cls).__new__(cls)
+        return cls.instance
+
     def get_all_books(self):
         schema = BookSchema(many=True)
         books = Book.query.all()

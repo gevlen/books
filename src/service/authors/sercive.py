@@ -4,6 +4,11 @@ from src.service.authors.models import AuthorSchema
 
 
 class AuthorService:
+    def __new__(cls):
+        if not hasattr(cls, 'instance'):
+            cls.instance = super(AuthorService, cls).__new__(cls)
+        return cls.instance
+
     def get_all_authors(self):
         schema = AuthorSchema(many=True)
         authors = Author.query.all()
